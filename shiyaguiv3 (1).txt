@@ -303,7 +303,7 @@ local function createControlButton()
     for i,v in (LocalPlayer:GetDescendants()) do
     if v.Name ~= "SHIYAGUIGAMEPASSES" then
     WorkedDONTTOUCH.Name = "SHIYAGUIGAMEPASSES"
-    WorkedDONTTOUCH.Parent = LocalPlayer.HavePasses
+    WorkedDONTTOUCH.Parent = LocalPlayer.HaveGamepasses
     Dances.Name = "Пак танцев"
     Dances.Value = 717065798
     trail.Name = "Трейл"
@@ -311,8 +311,8 @@ local function createControlButton()
     trail.Parent = LocalPlayer
     Dances.Parent = LocalPlayer
     wait(5)
-    trail.Parent = LocalPlayer.HavePasses
-    Dances.Parent = LocalPlayer.HavePasses
+    trail.Parent = LocalPlayer.HaveGamepasses
+    Dances.Parent = LocalPlayer.HaveGamepasses
     end
     end
     end)
