@@ -97,7 +97,7 @@ local function createControlButton()
     local destroybutton = Instance.new("TextButton")
     local GamepassButton = Instance.new("TextButton")
     local topbar1 = Instance.new("TextButton")
-    --local topbar2 = Instance.new("TextButton")
+    local topbar2 = Instance.new("TextButton")
     local topbar3 = Instance.new("TextButton")
     local topbar4 = Instance.new("TextButton")
     local topbar5 = Instance.new("TextButton")
@@ -107,7 +107,7 @@ local function createControlButton()
     local colorchanger = Instance.new("TextButton")
     local button = Instance.new("TextButton")
     local showbutton = Instance.new("TextButton")
-    --local candy = Instance.new("TextButton")
+    local candy = Instance.new("TextButton")
     screenGui.Name = "ShiyaGui"
     screenGui.Parent = game.CoreGui
     
@@ -165,15 +165,15 @@ local function createControlButton()
     topbar1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     topbar1.BorderColor3 = Color3.fromRGB(255, 255, 255)
 
-    --topbar2.Name = "Bar2"
-    --topbar2.Size = UDim2.new(0, 200, 0, 25)
-    --topbar2.Position = UDim2.new(0.5, -250, 0, 150)
-    --topbar2.Font = Enum.Font.Oswald
-    --topbar2.Text = ""
-    --topbar2.Parent = screenGui
-    --topbar2.Draggable = true
-    --topbar2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    --topbar2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    topbar2.Name = "Bar2"
+    topbar2.Size = UDim2.new(0, 200, 0, 25)
+    topbar2.Position = UDim2.new(0.5, -250, 0, 150)
+    topbar2.Font = Enum.Font.Oswald
+    topbar2.Text = ""
+    topbar2.Parent = screenGui
+    topbar2.Draggable = true
+    topbar2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    topbar2.BorderColor3 = Color3.fromRGB(255, 255, 255)
 
     topbar3.Name = "Bar3"
     topbar3.Size = UDim2.new(0, 200, 0, 25)
@@ -235,15 +235,15 @@ local function createControlButton()
     showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
     showbutton.BorderColor3 = Color3.fromRGB(255, 255, 255)
 
-    --candy.Name = "TeleportCandys"
-    --candy.Size = UDim2.new(0, 200, 0, 50)
-    --candy.Position = UDim2.new(0.5, -100, 0, 15)
-    --candy.Font = Enum.Font.Oswald
-    --candy.Text = "Конфетки"
-    --candy.TextSize = 18.000
-    --candy.Parent = topbar2
-    --candy.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-    --candy.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    candy.Name = "TeleportCandys"
+    candy.Size = UDim2.new(0, 200, 0, 50)
+    candy.Position = UDim2.new(0.5, -100, 0, 15)
+    candy.Font = Enum.Font.Oswald
+    candy.Text = "Ивент."
+    candy.TextSize = 18.000
+    candy.Parent = topbar2
+    candy.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+    candy.BorderColor3 = Color3.fromRGB(255, 255, 255)
 
     
     button.Name = "ToggleBlackHoleButton"
@@ -272,8 +272,8 @@ local function createControlButton()
     showbutton.MouseButton1Click:Connect(function()
         if button.Visible == true then
             button.Visible = false
-            --candy.Visible = false
-            --topbar2.Visible = false
+            candy.Visible = false
+            topbar2.Visible = false
             topbar3.Visible = false
             topbar4.Visible = false
             topbar5.Visible = false
@@ -285,8 +285,8 @@ local function createControlButton()
             GamepassButton.Visible = false
         else
             button.Visible = true
-            --candy.Visible = true
-            --topbar2.Visible = true
+            candy.Visible = true
+            topbar2.Visible = true
             topbar3.Visible = true
             topbar4.Visible = true
             topbar5.Visible = true
@@ -317,26 +317,26 @@ local function createControlButton()
     end
     end)
 
-    --candy.MouseButton1Click:Connect(function()
-        --while true do
-        --for i,v in (workspace.CandySpawners:GetDescendants()) do
-        --if v.Name == 'Candy' then
-        --v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-        --end
-        --end
-        --task.wait(0.3)
-        --end
-    --end)
+    candy.MouseButton1Click:Connect(function()
+        while true do
+        for i,v in (workspace.SnowSpawners.SpawnedDebris:GetDescendants()) do
+        if v.Name == 'CoinMesh' then
+        v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        end
+        end
+        task.wait(0.3)
+        end
+    end)
     colorchanger.MouseButton1Click:Connect(function()
         if z == 1 then
         showbutton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
         destroybutton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
         portalremover.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
         GamepassButton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        --candy.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
+        candy.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
         button.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
         showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        --candy.TextColor3 = Color3.fromRGB(0, 0, 0)
+        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
         button.TextColor3 = Color3.fromRGB(0, 0, 0)
         colorchanger.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
         colorchanger.Text = "OrangeGUI" 
@@ -348,10 +348,10 @@ local function createControlButton()
         portalremover.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
         GamepassButton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
         showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        --candy.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+        candy.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
         button.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
         showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        --candy.TextColor3 = Color3.fromRGB(0, 0, 0)
+        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
         button.TextColor3 = Color3.fromRGB(0, 0, 0)
         colorchanger.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
         colorchanger.Text = "GreenGUI" 
@@ -361,10 +361,10 @@ local function createControlButton()
         portalremover.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
         GamepassButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
         showbutton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        --candy.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+        candy.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
         button.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
         showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        --candy.TextColor3 = Color3.fromRGB(0, 0, 0)
+        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
         button.TextColor3 = Color3.fromRGB(0, 0, 0)
         colorchanger.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
         colorchanger.Text = "PinkGUI" 
@@ -376,10 +376,10 @@ local function createControlButton()
         portalremover.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
         GamepassButton.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
         showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        --candy.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
+        candy.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
         button.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
         showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        --candy.TextColor3 = Color3.fromRGB(0, 0, 0)
+        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
         button.TextColor3 = Color3.fromRGB(0, 0, 0)
         colorchanger.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
         colorchanger.Text = "AquaGUI" 
@@ -389,10 +389,10 @@ local function createControlButton()
         portalremover.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
         GamepassButton.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
         showbutton.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        --candy.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
+        candy.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
         button.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
         showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        --candy.TextColor3 = Color3.fromRGB(0, 0, 0)
+        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
         button.TextColor3 = Color3.fromRGB(0, 0, 0)
         colorchanger.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
         colorchanger.Text = "PurpleGUI" 
