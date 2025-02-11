@@ -289,10 +289,10 @@ local function createControlButton()
     local buttonPressed = false
     EventCoins.MouseButton1Click:Connect(function()
         if buttonPressed == false then
-        EventCoins.Text = "Включить"
+        EventCoins.Text = "Выключить"
         buttonPressed = true
         else
-        EventCoins.Text = "Выключить"
+        EventCoins.Text = "Включить"
         buttonPressed = false
         
     end
