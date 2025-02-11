@@ -1,5 +1,5 @@
-if game.CoreGui:FindFirstChild("ShiyaGui") then
-	game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Script By Shiya",Text = "Скрипт уже был запущен...",Duration = 5;})
+if game.CoreGui:FindFirstChild("XI_Div") then
+	game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Script By XI_Div",Text = "Скрипт уже был запущен...",Duration = 5;})
 	return
 end
 local Players = game:GetService("Players")
@@ -312,7 +312,7 @@ local function createControlButton()
     destroybutton.MouseButton1Click:Connect(function()
 
     blackHoleActive = false
-    ScreenGui:Destroy()
+    gui:Destroy()
 
     end)
 end
