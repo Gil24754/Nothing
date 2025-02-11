@@ -123,6 +123,7 @@ local function createControlButton()
     local HideGui = Instance.new("TextButton")
     local AllDancesGamepass = Instance.new("TextButton")
     local EventCoins = Instance.new("TextButton")
+    local destroybutton = Instance.new("TextButton")
 
     local elements = {button, AllDancesGamepass, EventCoins, Info1, Info2, Info3, Info4}
 
@@ -146,6 +147,15 @@ local function createControlButton()
     HideGui.TextColor3 = Color3.fromRGB(0, 170, 255)
     HideGui.TextScaled = true
     HideGui.Parent = gui
+
+    destroybutton.Name = "DESTROY"
+    destroybutton.Size = UDim2.new(0, 20, 0, 20)
+    destroybutton.Position = UDim2.new(0, 2, 0, 475)
+    destroybutton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    destroybutton.Text = "X"
+    destroybutton.TextColor3 = Color3.fromRGB(255, 0, 0)
+    destroybutton.TextScaled = true
+    destroybutton.Parent = gui
 
     background.Name = "GuiBackGround"
     BackGroundTween:Play()
@@ -297,6 +307,13 @@ local function createControlButton()
         
     end
     ToggleEventCoinsfarm()
+    end)
+    --DestroyButton
+    destroybutton.MouseButton1Click:Connect(function()
+
+    blackHoleActive = false
+    ScreenGui:Destroy()
+
     end)
 end
 
