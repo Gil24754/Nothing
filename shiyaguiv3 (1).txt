@@ -9,6 +9,10 @@ local Workspace = game:GetService("Workspace")
 local rootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
 local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local TweenService = game:GetService("TweenService")
+
+local waiting = false
+
 
 local players = game:GetService("Players")
 local virtualuser = game:GetService("VirtualUser")
@@ -22,9 +26,6 @@ LocalPlayer.Idled:Connect(function()
     virtualuser:Button2Up(Vector2.zero, CFrame.new())
 end)
 
-local z = 1
-
-
 
 local Folder = Instance.new("Folder", Workspace)
 local Part = Instance.new("Part", Folder)
@@ -36,7 +37,8 @@ local Attachment3 = Instance.new("Attachment", Part)
 Part.Anchored = true
 Part.CanCollide = false
 Part.Transparency = 1
- 
+
+--BLACKHOLE
 local function ForcePart(v)
     if v:IsA("Part") and not v.Anchored and not v.Parent:FindFirstChild("Humanoid") and not v.Parent:FindFirstChild("Head") and v.Name ~= "Handle" then
         for _, x in next, v:GetChildren() do
@@ -68,7 +70,22 @@ local function ForcePart(v)
 end
  
 local blackHoleActive = true
- 
+local EventCoinsfarm = true
+
+local function ToggleEventCoinsfarm()
+EventCoinsfarm = not EventCoinsfarm
+    if EventCoinsfarm then
+    while EventCoinsfarm do
+    for i,v in workspace.SnowSpawners.SpawnedDebris:GetDescendants() do
+        if v.Name == "CoinMesh" then
+            v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        end
+    end
+    task.wait(0.1)
+    end
+    end
+end
+
 local function toggleBlackHole()
     blackHoleActive = not blackHoleActive
     if blackHoleActive then
@@ -89,316 +106,177 @@ local function toggleBlackHole()
         end)
     end
 end
+
+--GUIS
 local function createControlButton()
-    local WorkedDONTTOUCH = Instance.new("IntValue")
-    local screenGui = Instance.new("ScreenGui")
-    local trail = Instance.new("IntValue")
-    local Dances = Instance.new("IntValue")
-    local destroybutton = Instance.new("TextButton")
-    local GamepassButton = Instance.new("TextButton")
-    local topbar1 = Instance.new("TextButton")
-    local topbar2 = Instance.new("TextButton")
-    local topbar3 = Instance.new("TextButton")
-    local topbar4 = Instance.new("TextButton")
-    local topbar5 = Instance.new("TextButton")
-    local topbar6 = Instance.new("TextButton")
-    local topbar7 = Instance.new("TextButton")
-    local portalremover = Instance.new("TextButton")
-    local colorchanger = Instance.new("TextButton")
+    --About Menu and others
+    local background = Instance.new("Frame")
+    local backgroundinside = Instance.new("Frame")
+    local Info1 = Instance.new("TextLabel")
+    local Info2 = Instance.new("TextLabel")
+    local Info3 = Instance.new("TextLabel")
+    local Info4 = Instance.new("TextLabel")
+    local gui = Instance.new("ScreenGui")
+
+    --Buttons and more
     local button = Instance.new("TextButton")
-    local showbutton = Instance.new("TextButton")
-    local candy = Instance.new("TextButton")
-    screenGui.Name = "ShiyaGui"
-    screenGui.Parent = game.CoreGui
+    local HideGui = Instance.new("TextButton")
+    local AllDancesGamepass = Instance.new("TextButton")
+    local EventCoins = Instance.new("TextButton")
+
+    local elements = {button, AllDancesGamepass, EventCoins, Info1, Info2, Info3, Info4}
+
+    --TweenInfo
+    local BackGroundTween = TweenService:Create(background, TweenInfo.new(2), {Size = UDim2.new(0, 500, 0, 500)})
+    local BackGroundinsideTween = TweenService:Create(backgroundinside, TweenInfo.new(2), {Size = UDim2.new(0, 450, 0, 450)})
+    local BackGroundHide = TweenService:Create(background, TweenInfo.new(2), {Size = UDim2.new(0, 0, 0, 0)})
+    local backgroundinsideHide = TweenService:Create(backgroundinside, TweenInfo.new(2), {Size = UDim2.new(0, 0, 0, 0)})
+    --
+
+    --GuiCreating
+    gui.Name = "ShiyaGui"
+    gui.Parent = game.CoreGui
     
-    portalremover.Name = "DestroyPortals"
-    portalremover.Size = UDim2.new(0, 50, 0, 50)
-    portalremover.Position = UDim2.new(0.5, -25, 0, 15)
-    portalremover.Font = Enum.Font.Oswald
-    portalremover.Text = "FIXER"
-    portalremover.TextSize = 14.000
-    portalremover.Parent = topbar5
-    portalremover.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-    portalremover.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    portalremover.TextColor3 = Color3.fromRGB(0, 0, 0)
+    --GuiSettings
+    HideGui.Name = "ButtonForShowAndHide"
+    HideGui.Size = UDim2.new(0, 20, 0, 20)
+    HideGui.Position = UDim2.new(0, 2, 0, 450)
+    HideGui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    HideGui.Text = "|||"
+    HideGui.TextColor3 = Color3.fromRGB(0, 170, 255)
+    HideGui.TextScaled = true
+    HideGui.Parent = gui
 
-    GamepassButton.Name = "GamepassGiver"
-    GamepassButton.Size = UDim2.new(0, 50, 0, 50)
-    GamepassButton.Position = UDim2.new(0.5, -25, 0, 15)
-    GamepassButton.Font = Enum.Font.Oswald
-    GamepassButton.Text = "Gamepass"
-    GamepassButton.TextSize = 14.000
-    GamepassButton.Parent = topbar4
-    GamepassButton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-    GamepassButton.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    GamepassButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    background.Name = "GuiBackGround"
+    BackGroundTween:Play()
+    background.Position = UDim2.new(0.5, -200, 0, 15)
+    background.BackgroundColor3 = Color3.fromRGB(43, 41, 39)
+    background.Transparency = 0.4
+    background.Parent = gui
 
-    destroybutton.Name = "DestroyButton"
-    destroybutton.Size = UDim2.new(0, 50, 0, 50)
-    destroybutton.Position = UDim2.new(0.5, -25, 0, 15)
-    destroybutton.Font = Enum.Font.Oswald
-    destroybutton.Text = "DESTROYGUI"
-    destroybutton.TextSize = 14.000
-    destroybutton.Parent = topbar6
-    destroybutton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-    destroybutton.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    destroybutton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    backgroundinside.Name = "GuiBackGroundInside"
+    BackGroundinsideTween:Play()
+    backgroundinside.Position = UDim2.new(0, 25, 0, 25)
+    backgroundinside.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    backgroundinside.Transparency = 0.4
+    backgroundinside.Parent = background
 
-    colorchanger.Name = "ChangeColorGuiPurple"
-    colorchanger.Size = UDim2.new(0, 50, 0, 50)
-    colorchanger.Position = UDim2.new(0.5, -25, 0, 15)
-    colorchanger.Font = Enum.Font.Oswald
-    colorchanger.Text = "PurpleGUI"
-    colorchanger.TextSize = 17.000
-    colorchanger.Parent = topbar7
-    colorchanger.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-    colorchanger.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    colorchanger.TextColor3 = Color3.fromRGB(0, 0, 0)
+    wait(2.2)
 
-    topbar1.Name = "Bar1"
-    topbar1.Size = UDim2.new(0, 50, 0, 25)
-    topbar1.Position = UDim2.new(0.5, -350, 0, 100)
-    topbar1.Font = Enum.Font.Oswald
-    topbar1.Text = ""
-    topbar1.Parent = screenGui
-    topbar1.Draggable = true
-    topbar1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    topbar1.BorderColor3 = Color3.fromRGB(255, 255, 255)
-
-    topbar2.Name = "Bar2"
-    topbar2.Size = UDim2.new(0, 200, 0, 25)
-    topbar2.Position = UDim2.new(0.5, -250, 0, 150)
-    topbar2.Font = Enum.Font.Oswald
-    topbar2.Text = ""
-    topbar2.Parent = screenGui
-    topbar2.Draggable = true
-    topbar2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    topbar2.BorderColor3 = Color3.fromRGB(255, 255, 255)
-
-    topbar3.Name = "Bar3"
-    topbar3.Size = UDim2.new(0, 200, 0, 25)
-    topbar3.Position = UDim2.new(0.5, -250, 0, 80)
-    topbar3.Font = Enum.Font.Oswald
-    topbar3.Text = ""
-    topbar3.Parent = screenGui
-    topbar3.Draggable = true
-    topbar3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    topbar3.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    
-    topbar4.Name = "Bar4"
-    topbar4.Size = UDim2.new(0, 50, 0, 25)
-    topbar4.Position = UDim2.new(0.5, -440, 0, 600)
-    topbar4.Font = Enum.Font.Oswald
-    topbar4.Text = ""
-    topbar4.Parent = screenGui
-    topbar4.Draggable = true
-    topbar4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    topbar4.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    
-    topbar5.Name = "Bar5"
-    topbar5.Size = UDim2.new(0, 50, 0, 25)
-    topbar5.Position = UDim2.new(0.5, -510, 0, 600)
-    topbar5.Font = Enum.Font.Oswald
-    topbar5.Text = ""
-    topbar5.Parent = screenGui
-    topbar5.Draggable = true
-    topbar5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    topbar5.BorderColor3 = Color3.fromRGB(255, 255, 255)
-
-    topbar6.Name = "Bar6"
-    topbar6.Size = UDim2.new(0, 50, 0, 25)
-    topbar6.Position = UDim2.new(0.5, -580, 0, 600)
-    topbar6.Font = Enum.Font.Oswald
-    topbar6.Text = ""
-    topbar6.Parent = screenGui
-    topbar6.Draggable = true
-    topbar6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    topbar6.BorderColor3 = Color3.fromRGB(255, 255, 255)
-
-    topbar7.Name = "Bar6"
-    topbar7.Size = UDim2.new(0, 50, 0, 25)
-    topbar7.Position = UDim2.new(0.5, -650, 0, 600)
-    topbar7.Font = Enum.Font.Oswald
-    topbar7.Text = ""
-    topbar7.Parent = screenGui
-    topbar7.Draggable = true
-    topbar7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    topbar7.BorderColor3 = Color3.fromRGB(255, 255, 255)
-
-    showbutton.Name = "ShadeBlackHoleButton"
-    showbutton.Size = UDim2.new(0, 50, 0, 50)
-    showbutton.Position = UDim2.new(0.5, -25, 0, 15)
-    showbutton.Font = Enum.Font.Oswald
-    showbutton.Text = "Спрятать:з"
-    showbutton.TextSize = 17.000
-    showbutton.Parent = topbar1
-    showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-    showbutton.BorderColor3 = Color3.fromRGB(255, 255, 255)
-
-    candy.Name = "TeleportCandys"
-    candy.Size = UDim2.new(0, 200, 0, 50)
-    candy.Position = UDim2.new(0.5, -100, 0, 15)
-    candy.Font = Enum.Font.Oswald
-    candy.Text = "Ивент."
-    candy.TextSize = 18.000
-    candy.Parent = topbar2
-    candy.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-    candy.BorderColor3 = Color3.fromRGB(255, 255, 255)
-
-    
     button.Name = "ToggleBlackHoleButton"
     button.Size = UDim2.new(0, 200, 0, 50)
-    button.Position = UDim2.new(0.5, -100, 0, 15)
+    button.Position = UDim2.new(0, 5, 0, 30)
     button.Font = Enum.Font.Oswald
     button.Text = "Активировать"
     button.TextSize = 18.000
-    button.Parent = topbar3
-    button.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-    button.BorderColor3 = Color3.fromRGB(255, 255, 255)
+    button.Parent = backgroundinside
+    button.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    button.BorderColor3 = Color3.new(0, 85, 255)
+    button.TextColor3 = Color3.new(255, 255, 255)
 
-    portalremover.MouseButton1Click:Connect(function()
-    workspace.MusicPortal.Part:Destroy()
-    for i,v in (game.workspace:GetDescendants()) do
-    if v.Name == "Teleport" then
-    v:Destroy()
-    end
-    end
-    end)
-   destroybutton.MouseButton1Click:Connect(function()
-    blackHoleActive = false
-    screenGui:Destroy()
-   end)
+    AllDancesGamepass.Name = "AllDanceGamepass"
+    AllDancesGamepass.Size = UDim2.new(0, 200, 0, 50)
+    AllDancesGamepass.Position = UDim2.new(0, 245, 0, 30)
+    AllDancesGamepass.Font = Enum.Font.Oswald
+    AllDancesGamepass.Text = "Все танцы"
+    AllDancesGamepass.TextSize = 18.000
+    AllDancesGamepass.Parent = backgroundinside
+    AllDancesGamepass.BorderColor3 = Color3.new(0, 85, 255)
+    AllDancesGamepass.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    AllDancesGamepass.TextColor3 = Color3.new(255, 255, 255)
+
+    EventCoins.Name = "ToggleEventCoinsButton"
+    EventCoins.Size = UDim2.new(0, 200, 0, 50)
+    EventCoins.Position = UDim2.new(0, 5, 0, 120)
+    EventCoins.Font = Enum.Font.Oswald
+    EventCoins.Text = "Активировать"
+    EventCoins.TextSize = 18.000
+    EventCoins.Parent = backgroundinside
+    EventCoins.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    EventCoins.BorderColor3 = Color3.new(0, 85, 255)
+    EventCoins.TextColor3 = Color3.new(255, 255, 255)
+
+    Info1.Name = "AboutBlackHole"
+    Info1.Text = "Кнопка притягивает к себе все объекты которые не закрепленны"
+    Info1.Size = UDim2.new(0, 200, 0, 30)
+    Info1.Position = UDim2.new(0, 5, 0, 0)
+    Info1.Font = Enum.Font.Oswald
+    Info1.TextScaled = true
+    Info1.BackgroundTransparency = 1
+    Info1.TextColor3 = Color3.fromRGB(65, 234, 17)
+    Info1.Parent = backgroundinside
+
+    Info2.Name = "TopBar"
+    Info2.Text = "Coded by XI_Div"
+    Info2.TextColor3 = Color3.fromRGB(0, 170, 255)
+    Info2.Font = Enum.Font.Oswald
+    Info2.TextScaled = true
+    Info2.Parent = background
+    Info2.Size = UDim2.new(0, 200, 0, 25)
+    Info2.Position = UDim2.new(0, 150, 0, 0)
+    Info2.BackgroundTransparency = 1
     
-    showbutton.MouseButton1Click:Connect(function()
-        if button.Visible == true then
-            button.Visible = false
-            candy.Visible = false
-            topbar2.Visible = false
-            topbar3.Visible = false
-            topbar4.Visible = false
-            topbar5.Visible = false
-            topbar6.Visible = false
-            topbar7.Visible = false
-            colorchanger.Visible = false
-            destroybutton.Visible = false
-            portalremover.Visible = false
-            GamepassButton.Visible = false
-        else
-            button.Visible = true
-            candy.Visible = true
-            topbar2.Visible = true
-            topbar3.Visible = true
-            topbar4.Visible = true
-            topbar5.Visible = true
-            topbar6.Visible = true
-            topbar7.Visible = true
-            colorchanger.Visible = true
-            destroybutton.Visible = true
-            portalremover.Visible = true
-            GamepassButton.Visible = true
-        end
-        end)
+    Info3.Name = "AboutDanceButton"
+    Info3.Text = "Кнопка выдаёт вам геймпасс со всеми танцами"
+    Info3.Size = UDim2.new(0, 200, 0, 30)
+    Info3.Position = UDim2.new(0, 245, 0, 0)
+    Info3.Font = Enum.Font.Oswald
+    Info3.TextScaled = true
+    Info3.BackgroundTransparency = 1
+    Info3.TextColor3 = Color3.fromRGB(65, 234, 17)
+    Info3.Parent = backgroundinside
 
-    GamepassButton.MouseButton1Click:Connect(function()
+    Info4.Name = "AboutCandysFarm"
+    Info4.Text = "Кнопка притягивает к себе все ивент монеты на карте"
+    Info4.Size = UDim2.new(0, 200, 0, 30)
+    Info4.Position = UDim2.new(0, 5, 0, 85)
+    Info4.Font = Enum.Font.Oswald
+    Info4.TextScaled = true
+    Info4.BackgroundTransparency = 1
+    Info4.TextColor3 = Color3.fromRGB(65, 234, 17)
+    Info4.Parent = backgroundinside
+
+
+
+    --Buttons Settings
+
+    --AllDances
+    AllDancesGamepass.MouseButton1Click:Connect(function()
     for i,v in (LocalPlayer:GetDescendants()) do
-    if v.Name ~= "SHIYAGUIGAMEPASSES" then
-    WorkedDONTTOUCH.Name = "SHIYAGUIGAMEPASSES"
-    WorkedDONTTOUCH.Parent = LocalPlayer.HaveGamepasses
+    local Dances = Instance.new("IntValue")
     Dances.Name = "Пак танцев"
     Dances.Value = 717065798
-    trail.Name = "Трейл"
-    trail.Value = 42688565
-    trail.Parent = LocalPlayer
     Dances.Parent = LocalPlayer
-    wait(5)
-    trail.Parent = LocalPlayer.HaveGamepasses
+    wait(2)
     Dances.Parent = LocalPlayer.HaveGamepasses
     end
-    end
     end)
-
-    candy.MouseButton1Click:Connect(function()
-        while true do
-        for i,v in (workspace.SnowSpawners.SpawnedDebris:GetDescendants()) do
-        if v.Name == 'CoinMesh' then
-        v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    --HideGui
+    HideGui.MouseButton1Click:Connect(function()
+        if background.Visible == true and waiting == false then
+        BackGroundHide:Play()
+        backgroundinsideHide:Play()
+        waiting = true
+        for _, element in ipairs(elements) do
+                element.Visible = false
+        end
+        wait(2)
+        background.Visible = false
+        waiting = false
+        else if background.Visible == false and waiting == false then
+        waiting = true
+        BackGroundTween:Play()
+        BackGroundinsideTween:Play()
+        background.Visible = true
+        wait(2)
+        waiting = false
+        for _, element in ipairs(elements) do
+                element.Visible = true
         end
         end
-        task.wait(0.3)
-        end
-    end)
-    colorchanger.MouseButton1Click:Connect(function()
-        if z == 1 then
-        showbutton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        destroybutton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        portalremover.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        GamepassButton.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        candy.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        button.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
-        button.TextColor3 = Color3.fromRGB(0, 0, 0)
-        colorchanger.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        colorchanger.Text = "OrangeGUI" 
-        z += 1
-        elseif z == 2 then
-        z += 1
-        showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        destroybutton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        portalremover.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        GamepassButton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        candy.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        button.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-        showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
-        button.TextColor3 = Color3.fromRGB(0, 0, 0)
-        colorchanger.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        colorchanger.Text = "GreenGUI" 
-        elseif z == 3 then
-        showbutton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        destroybutton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        portalremover.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        GamepassButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        showbutton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        candy.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        button.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-        showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
-        button.TextColor3 = Color3.fromRGB(0, 0, 0)
-        colorchanger.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        colorchanger.Text = "PinkGUI" 
-        z += 1
-        elseif z == 4 then
-        z += 1
-        showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        destroybutton.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        portalremover.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        GamepassButton.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        showbutton.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        candy.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        button.BackgroundColor3 = Color3.fromRGB(255, 85, 255)
-        showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
-        button.TextColor3 = Color3.fromRGB(0, 0, 0)
-        colorchanger.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        colorchanger.Text = "AquaGUI" 
-        elseif z == 5 then
-        showbutton.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        destroybutton.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        portalremover.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        GamepassButton.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        showbutton.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        candy.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        button.BackgroundColor3 = Color3.fromRGB(85, 255, 255)
-        showbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
-        candy.TextColor3 = Color3.fromRGB(0, 0, 0)
-        button.TextColor3 = Color3.fromRGB(0, 0, 0)
-        colorchanger.BackgroundColor3 = Color3.fromRGB(85, 0, 255)
-        colorchanger.Text = "PurpleGUI" 
-        z -= 4 
         end
     end)
+    --BlackHoleButton
     button.MouseButton1Click:Connect(function()
         toggleBlackHole()
         if blackHoleActive then
@@ -407,9 +285,18 @@ local function createControlButton()
             button.Text = "Включить"
         end
     end)
+    --EventButton
+    EventCoins.MouseButton1Click:Connect(function()
+        ToggleEventCoinsfarm()
+        if EventCoinsfarm then
+            EventCoins.Text = "Выключить"
+        else
+            EventCoins.Text = "Включить"
+    end
+    end)
 end
 
-
+ToggleEventCoinsfarm()
 createControlButton()
 toggleBlackHole()
--- @By DarkNess(Shiya)
+-- @By XI_Div
