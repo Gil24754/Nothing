@@ -148,8 +148,8 @@ local function createControlButton()
     HideGui.Parent = gui
 
     background.Name = "GuiBackGround"
+    background.Position = UDim2.new(0.34, 0, 0, 15)
     BackGroundTween:Play()
-    background.Position = UDim2.new(0.5, -200, 0, 15)
     background.BackgroundColor3 = Color3.fromRGB(43, 41, 39)
     background.Transparency = 0.4
     background.Parent = gui
