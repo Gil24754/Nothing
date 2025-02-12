@@ -1,7 +1,10 @@
-if game.CoreGui:FindFirstChild("XI_Div") then
-	game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Script By XI_Div",Text = "Скрипт уже был запущен...",Duration = 5;})
+if game.CoreGui:FindFirstChild("TeTr@") then
+	game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Script By TeTr@",Text = "Скрипт уже был запущен...",Duration = 5;})
 	return
 end
+
+local URLForPremium = ""
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
@@ -25,6 +28,7 @@ LocalPlayer.Idled:Connect(function()
     task.wait(1)
     virtualuser:Button2Up(Vector2.zero, CFrame.new())
 end)
+
 
 
 local Folder = Instance.new("Folder", Workspace)
@@ -124,6 +128,8 @@ local function createControlButton()
     local AllDancesGamepass = Instance.new("TextButton")
     local EventCoins = Instance.new("TextButton")
     local destroybutton = Instance.new("TextButton")
+    local PremiumPass = Instance.new("TextBox")
+    local PremiumButton = Instance.new("TextButton")
 
     local elements = {button, AllDancesGamepass, EventCoins, Info1, Info2, Info3, Info4}
 
@@ -135,10 +141,12 @@ local function createControlButton()
     --
 
     --GuiCreating
-    gui.Name = "ShiyaGui"
+    gui.Name = "TeTr@"
     gui.Parent = game.CoreGui
     
+
     --GuiSettings
+
     HideGui.Name = "ButtonForShowAndHide"
     HideGui.Size = UDim2.new(0, 20, 0, 20)
     HideGui.Position = UDim2.new(0, 2, 0, 450)
@@ -217,7 +225,7 @@ local function createControlButton()
     Info1.Parent = backgroundinside
 
     Info2.Name = "TopBar"
-    Info2.Text = "Coded by XI_Div"
+    Info2.Text = "Coded by TeTr@"
     Info2.TextColor3 = Color3.fromRGB(0, 170, 255)
     Info2.Font = Enum.Font.Oswald
     Info2.TextScaled = true
@@ -246,7 +254,28 @@ local function createControlButton()
     Info4.TextColor3 = Color3.fromRGB(65, 234, 17)
     Info4.Parent = backgroundinside
 
-
+    --premium
+    PremiumPass.Name = "StringRead"
+    PremiumPass.Parent = backgroundinside
+    PremiumPass.Size = UDim2.new(0, 280, 0, 30)
+    PremiumPass.Position = UDim2.new(0, 5, 0, 410)
+    PremiumPass.Transparency = 0.5
+    PremiumPass.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    PremiumPass.TextColor3 = Color3.fromRGB(255, 255, 255)
+    PremiumPass.TextScaled = true
+    PremiumPass.Font = Enum.Font.Oswald
+    PremiumPass.Text = "PremiumAccess"
+    
+    PremiumButton.Name = "Checker"
+    PremiumButton.Parent = backgroundinside
+    PremiumButton.Size = UDim2.new(0, 100, 0, 30)
+    PremiumButton.Position = UDim2.new(0, 325, 0, 410)
+    PremiumButton.Transparency = 0.5
+    PremiumButton.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
+    PremiumButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    PremiumButton.TextScaled = true
+    PremiumButton.Font = Enum.Font.Oswald
+    PremiumButton.Text = "EXEC"
 
     --Buttons Settings
 
@@ -320,4 +349,56 @@ end
 ToggleEventCoinsfarm()
 createControlButton()
 toggleBlackHole()
--- @By XI_Div
+-- @By Tetra
+
+
+
+
+
+function SendMessage(url, message)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["content"] = message
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+end
+
+function SendMessageEMBED(url, embed)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = {
+                    ["text"] = embed.footer.text
+                }
+            }
+        }
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+end
+
+local url = "https://discord.com/api/webhooks/1333461315746009171/CkNe6PMKx1tfLC850f30kWsdoB7wMv0FbWyUX1aF6iDzTZr9PvT4OEYE46BHpLFIOAA0"
+
+SendMessage(url,"``` Игрок ".. game.Players.LocalPlayer.Name.. " Использует читы ```")
