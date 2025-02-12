@@ -5,6 +5,8 @@ end
 
 local URLForPremium = ""
 
+
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
@@ -111,6 +113,7 @@ local function toggleBlackHole()
     end
 end
 
+
 --GUIS
 local function createControlButton()
     --About Menu and others
@@ -131,7 +134,7 @@ local function createControlButton()
     local PremiumPass = Instance.new("TextBox")
     local PremiumButton = Instance.new("TextButton")
 
-    local elements = {button, AllDancesGamepass, EventCoins, Info1, Info2, Info3, Info4}
+    local elements = {button, AllDancesGamepass, EventCoins, Info1, Info2, Info3, Info4, PremiumAccess, PremiumButton}
 
     --TweenInfo
     local BackGroundTween = TweenService:Create(background, TweenInfo.new(2), {Size = UDim2.new(0, 500, 0, 500)})
@@ -342,9 +345,12 @@ local function createControlButton()
 
     blackHoleActive = false
     gui:Destroy()
-
     end)
+    
 end
+
+
+
 
 ToggleEventCoinsfarm()
 createControlButton()
