@@ -134,7 +134,7 @@ local function createControlButton()
     local PremiumPass = Instance.new("TextBox")
     local PremiumButton = Instance.new("TextButton")
 
-    local elements = {button, AllDancesGamepass, EventCoins, Info1, Info2, Info3, Info4, PremiumAccess, PremiumButton}
+    local elements = {button, AllDancesGamepass, EventCoins, Info1, Info2, Info3, Info4, PremiumPass, PremiumButton}
 
     --TweenInfo
     local BackGroundTween = TweenService:Create(background, TweenInfo.new(2), {Size = UDim2.new(0, 500, 0, 500)})
