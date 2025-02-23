@@ -3,8 +3,8 @@ if game.CoreGui:FindFirstChild("TeTr@") then
 	return
 end
 
-local URLForPremium = ""
-
+local URLForPremium = game:HttpGet("https://pastebin.com/raw/Pcc02cKJ")
+local premiumStatus = false
 
 
 local Players = game:GetService("Players")
@@ -258,6 +258,13 @@ local function createControlButton()
     Info4.Parent = backgroundinside
 
     --premium
+
+    if premiumStatus == false then
+
+    EventCoins.Text = "Купите премиум"
+
+    end
+
     PremiumPass.Name = "StringRead"
     PremiumPass.Parent = backgroundinside
     PremiumPass.Size = UDim2.new(0, 280, 0, 30)
@@ -279,6 +286,21 @@ local function createControlButton()
     PremiumButton.TextScaled = true
     PremiumButton.Font = Enum.Font.Oswald
     PremiumButton.Text = "EXEC"
+
+    PremiumButton.MouseButton1Click:Connect(function()
+
+        local InputByUser = PremiumPass.Text
+
+        if InputByUser == URLForPremium then
+        premiumStatus = true
+        EventCoins.Text = "Активировать"
+
+        PremiumButton:Destroy()
+        PremiumPass:Destroy()
+
+        end
+
+    end)
 
     --Buttons Settings
 
@@ -330,6 +352,7 @@ local function createControlButton()
     --EventButton
     local buttonPressed = false
     EventCoins.MouseButton1Click:Connect(function()
+    if premiumStatus == true then
         if buttonPressed == false then
         EventCoins.Text = "Выключить"
         buttonPressed = true
@@ -339,6 +362,7 @@ local function createControlButton()
         
     end
     ToggleEventCoinsfarm()
+    end
     end)
     --DestroyButton
     destroybutton.MouseButton1Click:Connect(function()
